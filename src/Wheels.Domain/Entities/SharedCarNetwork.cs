@@ -4,6 +4,7 @@ namespace Wheels.Domain.Entities;
 
 public class SharedCarNetwork
 {
+    public string Uuid { get; init; }
     public NetworkNode Destination { get; init; }
     public List<NetworkNode> Passengers { get; init; }
     public NetworkNode Driver { get; init; }
@@ -20,9 +21,11 @@ public class SharedCarNetwork
         Passengers = new List<NetworkNode>();
         Edges = new List<NetworkEdge>();
         OptimalPath = new List<NetworkEdge>();
+        Uuid = Guid.NewGuid().ToString();
     }
 
     public SharedCarNetwork(
+        string uuid,
         NetworkNode destination,
         NetworkNode driver,
         List<NetworkNode> passengers,
@@ -34,6 +37,7 @@ public class SharedCarNetwork
         Passengers = passengers;
         Edges = edges;
         OptimalPath = new List<NetworkEdge>();
+        Uuid = uuid;
     }
 
     public List<NetworkNode> GetNeighbors(NetworkNode node)

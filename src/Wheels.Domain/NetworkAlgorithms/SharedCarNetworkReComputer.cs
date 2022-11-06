@@ -58,6 +58,7 @@ public class SharedCarNetworkReComputer
         nodes.Add(newPassanger);
 
         SharedCarNetwork newNetwork = new SharedCarNetwork(
+            sharedCarNetwork.Uuid,
             sharedCarNetwork.Destination,
             sharedCarNetwork.Driver,
             nodes,
