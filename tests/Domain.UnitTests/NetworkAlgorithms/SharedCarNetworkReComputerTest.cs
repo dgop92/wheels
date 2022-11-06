@@ -1,6 +1,7 @@
 using Wheels.Domain.Entities;
 using Wheels.Domain.Services;
 using Wheels.Domain.Application.NetworkAlgorithms;
+using SharedKernel.Errors;
 
 namespace Domain.UnitTests.NetworkAlgorithms;
 
@@ -65,6 +66,34 @@ public class SharedCarNetworkReComputerTest
 
         Assert.AreEqual(2, newNetwork2.Passengers.Count);
         Assert.AreEqual(5, newNetwork2.Edges.Count);
+    }
+
+    [TestMethod]
+    public async Task ShouldThrowErrorMaximumPassengers()
+    {
+
+        // It doesn't matter for this unit test if the passengers has the same location,
+        List<NetworkNode> passengers = Enumerable.Range(2, 6).Select(
+            i => new NetworkNode(
+                testLocations[2],
+                new User(i.ToString(), UserType.Passenger)
+            )
+        ).ToList();
+
+        // It doesn't matter for this unit test if the network has no edges
+        SharedCarNetwork newNetwork = new SharedCarNetwork(
+            Guid.NewGuid().ToString(),
+            new NetworkNode(testLocations[1]),
+            new NetworkNode(testLocations[0], driverUser),
+            passengers,
+            new List<NetworkEdge>()
+        );
+
+        await Assert.ThrowsExceptionAsync<DomainException>(
+            async () => await _sharedCarNetworkReComputer.AddNewPassanger(
+                newNetwork, passengers.First()
+            )
+        );
     }
 
     [TestMethod]

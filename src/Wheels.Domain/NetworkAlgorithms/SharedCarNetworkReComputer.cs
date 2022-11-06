@@ -1,6 +1,7 @@
 using Wheels.Domain.Entities;
 using Wheels.Domain.Services;
 using SharedKernel.Utils;
+using SharedKernel.Errors;
 
 namespace Wheels.Domain.Application.NetworkAlgorithms;
 
@@ -31,10 +32,20 @@ public class SharedCarNetworkReComputer
     {
         // A shallow copy is enough because edges and nodes are immutable
         List<NetworkEdge> edges = new List<NetworkEdge>(sharedCarNetwork.Edges);
-        List<NetworkNode> nodes = new List<NetworkNode>(sharedCarNetwork.Passengers);
+        List<NetworkNode> passangerNodes = new List<NetworkNode>(
+            sharedCarNetwork.Passengers
+        );
 
-        // Connect each passannger to the new user
-        foreach (var node in nodes)
+        if (passangerNodes.Count >= 6)
+        {
+            throw new DomainException(
+                "The maximum number of passengers is 6",
+                ErrorCode.InvalidOperation
+            );
+        }
+
+        // Connect each passannger to the new passanger
+        foreach (var node in passangerNodes)
         {
             var networkEdge = await CreateNetworkEdge(
                 newPassanger,
@@ -55,13 +66,13 @@ public class SharedCarNetworkReComputer
         edges.Add(destinationEdge);
         edges.Add(driverEdge);
 
-        nodes.Add(newPassanger);
+        passangerNodes.Add(newPassanger);
 
         SharedCarNetwork newNetwork = new SharedCarNetwork(
             sharedCarNetwork.Uuid,
             sharedCarNetwork.Destination,
             sharedCarNetwork.Driver,
-            nodes,
+            passangerNodes,
             edges
         );
 
