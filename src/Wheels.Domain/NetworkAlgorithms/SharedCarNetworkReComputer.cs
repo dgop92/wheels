@@ -3,7 +3,7 @@ using Wheels.Domain.Services;
 using SharedKernel.Utils;
 using SharedKernel.Errors;
 
-namespace Wheels.Domain.Application.NetworkAlgorithms;
+namespace Wheels.Domain.NetworkAlgorithms;
 
 public class SharedCarNetworkReComputer
 {

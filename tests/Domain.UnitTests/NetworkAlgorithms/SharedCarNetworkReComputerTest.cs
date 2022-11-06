@@ -1,6 +1,6 @@
 using Wheels.Domain.Entities;
 using Wheels.Domain.Services;
-using Wheels.Domain.Application.NetworkAlgorithms;
+using Wheels.Domain.NetworkAlgorithms;
 using SharedKernel.Errors;
 
 namespace Domain.UnitTests.NetworkAlgorithms;
