@@ -53,7 +53,7 @@ public class SharedCarNetworkMockRepository : ISharedCarNetworkRepository
         return _networks;
     }
 
-    public SharedCarNetwork? GetSharedCarNetworkById(string uuid)
+    public SharedCarNetwork? GetById(string uuid)
     {
         return _networks.FirstOrDefault(n => n.Uuid == uuid);
     }
