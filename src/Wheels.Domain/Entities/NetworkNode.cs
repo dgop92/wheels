@@ -6,15 +6,6 @@ public class NetworkNode
 
     public Location Location { get; init; }
 
-    public User? User { get; init; }
-
-    public NetworkNode(Location location, User user)
-    {
-        Location = location;
-        User = user;
-        uuid = Guid.NewGuid().ToString();
-    }
-
     public NetworkNode(Location location)
     {
         Location = location;

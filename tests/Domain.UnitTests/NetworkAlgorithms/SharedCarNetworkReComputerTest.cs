@@ -21,7 +21,7 @@ public class SharedCarNetworkReComputerTest
 
     private static SharedCarNetwork createEmptySharedCarNetwork()
     {
-        NetworkNode driver = new NetworkNode(testLocations[0], driverUser);
+        NetworkNode driver = new UserNode(testLocations[0], driverUser);
         NetworkNode destination = new NetworkNode(testLocations[1]);
 
         return new SharedCarNetwork(destination, driver);
@@ -40,7 +40,7 @@ public class SharedCarNetworkReComputerTest
     public async Task ShouldAddNewtPassengerInEmptyNetwork()
     {
         User passengerUser = new User("2", UserType.Passenger);
-        NetworkNode passenger = new NetworkNode(testLocations[2], passengerUser);
+        NetworkNode passenger = new UserNode(testLocations[2], passengerUser);
 
         SharedCarNetwork network = createEmptySharedCarNetwork();
         SharedCarNetwork newNetwork =
@@ -55,8 +55,8 @@ public class SharedCarNetworkReComputerTest
     {
         User passengerUser1 = new User("2", UserType.Passenger);
         User passengerUser2 = new User("3", UserType.Passenger);
-        NetworkNode passenger1 = new NetworkNode(testLocations[2], passengerUser1);
-        NetworkNode passenger2 = new NetworkNode(testLocations[3], passengerUser2);
+        NetworkNode passenger1 = new UserNode(testLocations[2], passengerUser1);
+        NetworkNode passenger2 = new UserNode(testLocations[3], passengerUser2);
 
         SharedCarNetwork network = createEmptySharedCarNetwork();
         SharedCarNetwork newNetwork1 =
@@ -74,7 +74,7 @@ public class SharedCarNetworkReComputerTest
 
         // It doesn't matter for this unit test if the passengers has the same location,
         List<NetworkNode> passengers = Enumerable.Range(2, 6).Select(
-            i => new NetworkNode(
+            i => (NetworkNode)new UserNode(
                 testLocations[2],
                 new User(i.ToString(), UserType.Passenger)
             )
@@ -84,7 +84,7 @@ public class SharedCarNetworkReComputerTest
         SharedCarNetwork newNetwork = new SharedCarNetwork(
             Guid.NewGuid().ToString(),
             new NetworkNode(testLocations[1]),
-            new NetworkNode(testLocations[0], driverUser),
+            new UserNode(testLocations[0], driverUser),
             passengers,
             new List<NetworkEdge>()
         );
@@ -100,7 +100,7 @@ public class SharedCarNetworkReComputerTest
     public async Task ShouldComputeOptimalPathInEmptyNetwork()
     {
         User passengerUser = new User("2", UserType.Passenger);
-        NetworkNode passenger = new NetworkNode(testLocations[2], passengerUser);
+        NetworkNode passenger = new UserNode(testLocations[2], passengerUser);
 
         SharedCarNetwork network = createEmptySharedCarNetwork();
         SharedCarNetwork newNetwork =
@@ -121,8 +121,8 @@ public class SharedCarNetworkReComputerTest
     {
         User passengerUser1 = new User("2", UserType.Passenger);
         User passengerUser2 = new User("3", UserType.Passenger);
-        NetworkNode passenger1 = new NetworkNode(testLocations[2], passengerUser1);
-        NetworkNode passenger2 = new NetworkNode(testLocations[3], passengerUser2);
+        NetworkNode passenger1 = new UserNode(testLocations[2], passengerUser1);
+        NetworkNode passenger2 = new UserNode(testLocations[3], passengerUser2);
 
         SharedCarNetwork network = createEmptySharedCarNetwork();
         SharedCarNetwork newNetwork1 =

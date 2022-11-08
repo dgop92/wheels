@@ -1,4 +1,5 @@
 using Wheels.WebApi.Middlewares;
+using Wheels.WebApi.ModelAPI;
 using Wheels.Infrastructure.Repository;
 using SharedKernel.Errors;
 
@@ -18,7 +19,10 @@ app.UseExceptionHandler(exceptionHandlerApp =>
 
 app.MapGet("/networks", (SharedCarNetworkMockRepository repository) =>
 {
-    return repository.GetAll();
+    var networks = repository.GetAll();
+    var networksDtos = networks.Select(n => Transformers.ToSharedCarNetworkDTO(n));
+
+    return networksDtos;
 });
 
 app.MapGet(
@@ -27,7 +31,7 @@ app.MapGet(
     var network = repository.GetById(id);
     if (network != null)
     {
-        return network;
+        return Transformers.ToSharedCarNetworkDTO(network);
     }
 
     throw new PresentationException("network not found", ErrorCode.NotFound);

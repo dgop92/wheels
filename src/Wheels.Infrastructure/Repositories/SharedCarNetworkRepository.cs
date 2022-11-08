@@ -8,7 +8,7 @@ public static class DefaultCarNetworks
 
     public static SharedCarNetwork GetSharedCarNetwork1()
     {
-        NetworkNode driver = new NetworkNode(
+        NetworkNode driver = new UserNode(
             new Location(10.9976739, -74.8172191),
             new User("e2795eca-456", UserType.Driver)
         );
@@ -24,7 +24,7 @@ public static class DefaultCarNetworks
 
     public static SharedCarNetwork GetSharedCarNetwork2()
     {
-        NetworkNode driver = new NetworkNode(
+        NetworkNode driver = new UserNode(
             new Location(10.9976739, -74.8172191),
             new User("e2795eca-456", UserType.Driver)
         );
@@ -43,7 +43,7 @@ public static class DefaultCarNetworks
 public class SharedCarNetworkMockRepository : ISharedCarNetworkRepository
 {
 
-    private readonly SharedCarNetwork[] _networks = {
+    private static readonly SharedCarNetwork[] _networks = {
         DefaultCarNetworks.GetSharedCarNetwork1(),
         DefaultCarNetworks.GetSharedCarNetwork2(),
     };
