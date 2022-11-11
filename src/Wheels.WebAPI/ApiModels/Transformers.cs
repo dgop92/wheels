@@ -1,4 +1,5 @@
 using Wheels.Domain.Entities;
+using Wheels.Domain.Dtos;
 
 namespace Wheels.WebApi.ModelAPI;
 

@@ -1,6 +1,6 @@
 using Wheels.Domain.Entities;
 
-namespace Wheels.WebApi.ModelAPI;
+namespace Wheels.Domain.Dtos;
 
 public class ReComputeNetworkDTO
 {

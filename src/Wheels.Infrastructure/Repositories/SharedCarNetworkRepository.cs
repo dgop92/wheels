@@ -48,13 +48,13 @@ public class SharedCarNetworkMockRepository : ISharedCarNetworkRepository
         DefaultCarNetworks.GetSharedCarNetwork2(),
     };
 
-    public SharedCarNetwork[] GetAll()
+    public Task<SharedCarNetwork[]> GetAll()
     {
-        return _networks;
+        return Task.FromResult(_networks);
     }
 
-    public SharedCarNetwork? GetById(string uuid)
+    public Task<SharedCarNetwork?> GetById(string uuid)
     {
-        return _networks.FirstOrDefault(n => n.Uuid == uuid);
+        return Task.FromResult(_networks.FirstOrDefault(n => n.Uuid == uuid));
     }
 }
