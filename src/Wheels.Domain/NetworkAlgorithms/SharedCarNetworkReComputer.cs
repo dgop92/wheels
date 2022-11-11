@@ -25,18 +25,18 @@ public class SharedCarNetworkReComputer
         _fallBackPathService = fallBackPathService;
     }
 
-    public async Task<SharedCarNetwork> AddNewPassanger(
+    public async Task<SharedCarNetwork> AddNewPassenger(
         SharedCarNetwork sharedCarNetwork,
-        NetworkNode newPassanger
+        NetworkNode newPassenger
     )
     {
         // A shallow copy is enough because edges and nodes are immutable
         List<NetworkEdge> edges = new List<NetworkEdge>(sharedCarNetwork.Edges);
-        List<NetworkNode> passangerNodes = new List<NetworkNode>(
+        List<NetworkNode> passengerNodes = new List<NetworkNode>(
             sharedCarNetwork.Passengers
         );
 
-        if (passangerNodes.Count >= 6)
+        if (passengerNodes.Count >= 6)
         {
             throw new DomainException(
                 "The maximum number of passengers is 6",
@@ -44,35 +44,35 @@ public class SharedCarNetworkReComputer
             );
         }
 
-        // Connect each passannger to the new passanger
-        foreach (var node in passangerNodes)
+        // Connect each passannger to the new passenger
+        foreach (var node in passengerNodes)
         {
             var networkEdge = await CreateNetworkEdge(
-                newPassanger,
+                newPassenger,
                 node
             );
             edges.Add(networkEdge);
         }
 
         NetworkEdge destinationEdge = await CreateNetworkEdge(
-            newPassanger,
+            newPassenger,
             sharedCarNetwork.Destination
         );
         NetworkEdge driverEdge = await CreateNetworkEdge(
-            newPassanger,
+            newPassenger,
             sharedCarNetwork.Driver
         );
 
         edges.Add(destinationEdge);
         edges.Add(driverEdge);
 
-        passangerNodes.Add(newPassanger);
+        passengerNodes.Add(newPassenger);
 
         SharedCarNetwork newNetwork = new SharedCarNetwork(
             sharedCarNetwork.Uuid,
             sharedCarNetwork.Destination,
             sharedCarNetwork.Driver,
-            passangerNodes,
+            passengerNodes,
             edges
         );
 

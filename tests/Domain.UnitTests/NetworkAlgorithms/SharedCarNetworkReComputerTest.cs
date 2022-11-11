@@ -44,7 +44,7 @@ public class SharedCarNetworkReComputerTest
 
         SharedCarNetwork network = createEmptySharedCarNetwork();
         SharedCarNetwork newNetwork =
-            await _sharedCarNetworkReComputer.AddNewPassanger(network, passenger);
+            await _sharedCarNetworkReComputer.AddNewPassenger(network, passenger);
 
         Assert.AreEqual(1, newNetwork.Passengers.Count);
         Assert.AreEqual(2, newNetwork.Edges.Count);
@@ -60,9 +60,9 @@ public class SharedCarNetworkReComputerTest
 
         SharedCarNetwork network = createEmptySharedCarNetwork();
         SharedCarNetwork newNetwork1 =
-            await _sharedCarNetworkReComputer.AddNewPassanger(network, passenger1);
+            await _sharedCarNetworkReComputer.AddNewPassenger(network, passenger1);
         SharedCarNetwork newNetwork2 =
-            await _sharedCarNetworkReComputer.AddNewPassanger(newNetwork1, passenger2);
+            await _sharedCarNetworkReComputer.AddNewPassenger(newNetwork1, passenger2);
 
         Assert.AreEqual(2, newNetwork2.Passengers.Count);
         Assert.AreEqual(5, newNetwork2.Edges.Count);
@@ -90,7 +90,7 @@ public class SharedCarNetworkReComputerTest
         );
 
         await Assert.ThrowsExceptionAsync<DomainException>(
-            async () => await _sharedCarNetworkReComputer.AddNewPassanger(
+            async () => await _sharedCarNetworkReComputer.AddNewPassenger(
                 newNetwork, passengers.First()
             )
         );
@@ -104,7 +104,7 @@ public class SharedCarNetworkReComputerTest
 
         SharedCarNetwork network = createEmptySharedCarNetwork();
         SharedCarNetwork newNetwork =
-            await _sharedCarNetworkReComputer.AddNewPassanger(network, passenger);
+            await _sharedCarNetworkReComputer.AddNewPassenger(network, passenger);
 
         List<NetworkEdge> optimalPath = newNetwork.OptimalPath;
         Assert.AreEqual(2, optimalPath.Count);
@@ -126,9 +126,9 @@ public class SharedCarNetworkReComputerTest
 
         SharedCarNetwork network = createEmptySharedCarNetwork();
         SharedCarNetwork newNetwork1 =
-            await _sharedCarNetworkReComputer.AddNewPassanger(network, passenger1);
+            await _sharedCarNetworkReComputer.AddNewPassenger(network, passenger1);
         SharedCarNetwork newNetwork2 =
-            await _sharedCarNetworkReComputer.AddNewPassanger(newNetwork1, passenger2);
+            await _sharedCarNetworkReComputer.AddNewPassenger(newNetwork1, passenger2);
 
         List<NetworkEdge> optimalPath = newNetwork2.OptimalPath;
         Assert.AreEqual(3, optimalPath.Count);

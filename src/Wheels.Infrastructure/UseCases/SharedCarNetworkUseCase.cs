@@ -61,7 +61,7 @@ public class SharedCarNetworkUseCase : ISharedCarNetworkUseCase
             reComputeNetworkDTO.SharedCarNetworkDTO.Edges
         );
 
-        var network = await _reComputer.AddNewPassanger(
+        var network = await _reComputer.AddNewPassenger(
             sharedCarNetwork,
             reComputeNetworkDTO.Passenger
         );
